@@ -1,0 +1,16 @@
+module MyTypes {
+
+    @nested
+    struct Point2D {
+        double x;
+        double y;
+    };
+
+    @nested
+    struct Point3D {
+        double x;
+        double y;
+        double z;
+    };
+
+};
