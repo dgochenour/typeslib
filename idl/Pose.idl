@@ -1,0 +1,12 @@
+#include "Point.idl"
+#include "Quaternion.idl"
+
+module MyTypes {
+
+    struct Pose {
+        @key long obj_id;
+        Point3D position;
+        Quaternion orientation;
+    };
+
+};
