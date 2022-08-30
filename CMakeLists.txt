@@ -31,8 +31,6 @@ set(CONNEXT_PRO_LIBS
     nddsc${SHAREDLIB_SFX}${DEBUG_SFX} 
     nddscore${SHAREDLIB_SFX}${DEBUG_SFX}
 )
-set(GEN_DIR gen)
-set(IDL_DIR idl)
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -40,7 +38,8 @@ include_directories(
     $ENV{NDDSHOME}/include/ndds
     $ENV{NDDSHOME}/include/ndds/hpp     
 )
-
+set(GEN_DIR gen)
+set(IDL_DIR idl)
 
 file(GLOB IDL_SOURCE_FILES "${IDL_DIR}/*.idl")
 
@@ -67,3 +66,12 @@ endforeach()
 
 add_library(typelib STATIC ${GENERATED_CXX} ${GENERATED_HPP})
 target_link_libraries(typelib ${CONNEXT_PRO_LIBS} ${SYSLIBS})
+
+
+install(TARGETS typelib
+        CONFIGURATIONS Debug
+        ARCHIVE DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/out/Debug)
+install(TARGETS typelib
+        CONFIGURATIONS Release
+        ARCHIVE DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/out/Release)
+install(FILES ${GENERATED_HPP} DESTINATION ${CMAKE_CURRENT_SOURCE_DIR}/out/include)
